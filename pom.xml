@@ -48,6 +48,14 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/lonecalvary78/data-partitioning-util</url>
+        </repository>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
