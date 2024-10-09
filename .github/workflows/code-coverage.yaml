@@ -1,8 +1,7 @@
 name: code-coverage
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron: '30 17 * * *'
 jobs:
   code-coverage:
     runs-on: ubuntu-latest
