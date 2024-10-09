@@ -1,10 +1,10 @@
-name: unit-tests
+name: code-coverage
 on:
   push:
     branches:
       - master
 jobs:
-  unit-test:
+  code-coverage:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
