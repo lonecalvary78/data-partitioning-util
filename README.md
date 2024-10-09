@@ -1,4 +1,4 @@
 # Data Partitioning Util
-[![unit-tests](https://github.com/lonecalvary78/data-partitioning-util/actions/workflows/unit-tests.yaml/badge.svg)](https://github.com/lonecalvary78/data-partitioning-util/actions/workflows/unit-tests.yaml)
+[![code-coverage](https://github.com/lonecalvary78/data-partitioning-util/actions/workflows/code-coverage.yaml/badge.svg)](https://github.com/lonecalvary78/data-partitioning-util/actions/workflows/code-coverage.yaml)
 ## Overview
 The tool for partitioning the largest data sets
