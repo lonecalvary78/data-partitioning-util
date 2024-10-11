@@ -7,18 +7,22 @@ import java.util.List;
 
 public class DataPartitionerUtil<T extends Object> {
 
-  public List<Partitioner<T>> splitIntoPartitioner(List<T> sourceData) {
+  public List<Partitioner<T>> splitIntoPartitioner(List<T> dataSet) {
     var partitioners = new ArrayList<Partitioner<T>>();
-    if(sourceData == null || (sourceData != null && sourceData.isEmpty()))
+    if(isDataSetEmpty(dataSet))
       throw new IllegalArgumentException("The empty source data is required to perform this operation");
-    var maximumRecordPerChunk = getMaximumRecordPerChunk(sourceData.size());
-    var totalChunks = Math.ceilDiv(sourceData.size(), maximumRecordPerChunk);
+    var maximumRecordPerChunk = getMaximumRecordPerChunk(dataSet.size());
+    var totalChunks = Math.ceilDiv(dataSet.size(), maximumRecordPerChunk);
     var counter = 0;
     while(counter<totalChunks) {
-      partitioners.add(new Partitioner<>(counter, sourceData.subList(startPos(counter, maximumRecordPerChunk), endPos(counter, maximumRecordPerChunk, sourceData.size()))));
+      partitioners.add(new Partitioner<>(counter, dataSet.subList(startPos(counter, maximumRecordPerChunk), endPos(counter, maximumRecordPerChunk, dataSet.size()))));
       counter++;
     }
     return partitioners;
+  }
+
+  private boolean isDataSetEmpty(List<T> dataSet) {
+    return dataSet == null || dataSet.isEmpty();
   }
 
   private int getMaximumRecordPerChunk(int totalRecords) {
