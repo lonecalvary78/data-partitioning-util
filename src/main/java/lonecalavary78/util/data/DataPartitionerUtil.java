@@ -8,18 +8,24 @@ import lonecalavary78.util.data.model.Partitioner;
 public class DataPartitionerUtil<T> {
 
   public List<Partitioner<T>> splitIntoPartitioner(List<T> dataSet) {
-    var partitioners = new ArrayList<Partitioner<T>>();
+    var partitionedDataSets = new ArrayList<Partitioner<T>>();
     if (isDataSetEmpty(dataSet)) {
-      throw new IllegalArgumentException("The empty source data is required to perform this operation");
+      throw new IllegalArgumentException(
+              "The empty source data is required to perform this operation");
     }
     var maximumRecordPerChunk = getMaximumRecordPerChunk(dataSet.size());
     var totalChunks = Math.ceilDiv(dataSet.size(), maximumRecordPerChunk);
     var counter = 0;
     while (counter < totalChunks) {
-      partitioners.add(new Partitioner<>(counter, dataSet.subList(startPos(counter, maximumRecordPerChunk), endPos(counter, maximumRecordPerChunk, dataSet.size()))));
+      partitionedDataSets.add(new Partitioner<>(counter,
+              dataSet.subList(
+                      startPos(counter, maximumRecordPerChunk),
+                      endPos(counter,
+                             maximumRecordPerChunk,
+                             dataSet.size()))));
       counter++;
     }
-    return partitioners;
+    return partitionedDataSets;
   }
 
   private boolean isDataSetEmpty(List<T> dataSet) {
@@ -29,7 +35,8 @@ public class DataPartitionerUtil<T> {
   private int getMaximumRecordPerChunk(int totalRecords) {
     var baseNumber = 10;
     if (totalRecords <= 0) {
-      throw new IllegalArgumentException("The total record with 0 or less is not allow to get calculated divider");
+      throw new IllegalArgumentException(
+              "The total record with 0 or less is not allow to get calculated divider");
     }
 
     var exponent = Math.ceil(Math.log10(totalRecords));
